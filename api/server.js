@@ -16,7 +16,7 @@ const sessionConfig = {
     httpOnly: true,
   },
   resave: false,
-  saveUninitalized: false,
+  saveUninitialized: false,
 };
 
 server.use(session(sessionConfig));
