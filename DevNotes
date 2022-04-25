@@ -36,3 +36,57 @@
         - If password is missing from req.body, or if it's 3 chars or shorter
         { status: 422, message: "Password must be longer than 3 chars" }
 */
+
+/** auth-router
+    // Require `checkUsernameFree`, `checkUsernameExists` and `checkPasswordLength` middleware functions from `auth-middleware.js`. You will need them here!
+
+    * [POST] /api/auth/register 
+        - Req: 
+            { "username": "sue", "password": "1234" }
+        - Res:
+            * success
+                status(200)
+                { "user_id": 2, "username": "sue" }
+            * response on username taken
+                { status: 422, message: "Username taken" }
+            * response on password three chars or less
+                { message: "Password must be longer than 3 chars" }
+    * [POST] /api/auth/login
+        - Req:
+            { "username": "sue", "password": "1234" }
+        - Res:
+            * success
+                { status: 200, message: "Welcome sue!" }
+            * response on invalid credentials
+                { status(401), message: "Invalid credentials" }
+    * [GET] /api/auth/logout
+        - Res:
+            * for logged-in users
+                { status: 200, message: "logged out" }
+            * for not-logged-in users
+                { status: 200, message: "no session" }
+    // Don't forget to add the router to the `exports` object so it can be required in other modules
+*/
+
+/** users-router
+    // Require the `restricted` middleware from `auth-middleware.js`. You will need it here!
+    * [GET] /api/users
+        - This endpoint is RESTRICTED: only authenticated clients
+        should have access.
+        - Res: 
+            *success:
+            status 200
+            [
+                {
+                    "user_id": 1,
+                    "username": "bob"
+                },
+                // etc
+            ]
+            *non-authenticated
+            status 401
+            {
+                "message": "You shall not pass!"
+            }
+    // Don't forget to add the router to the `exports` object so it can be required in other modules
+*/
