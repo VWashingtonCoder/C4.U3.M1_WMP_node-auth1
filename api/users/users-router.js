@@ -1,5 +1,6 @@
 const express = require('express');
 const Users = require('./users-model');
+const { checkPasswordLength } = require('../auth/auth-middleware')
 // Require the `restricted` middleware from `auth-middleware.js`. You will need it here!
 const router = express.Router();
 
@@ -27,7 +28,7 @@ const router = express.Router();
 */
 
 router.get('/', (req, res, next) => {
-  
+  res.send("test route")
 })
 
 module.exports = router

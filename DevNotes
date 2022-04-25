@@ -9,3 +9,30 @@
         - resolves to the newly inserted user { user_id, username }
     // Don't forget to add these to the `exports` object so they can be required in other modules
 */
+
+/** server
+    // Do what needs to be done to support sessions with the `express-session` package!
+  
+    // To respect users' privacy, do NOT send them a cookie unless they log in.
+  
+    // This is achieved by setting 'saveUninitialized' to false, and by not changing the `req.session` object unless the user authenticates.
+
+    // Users that do authenticate should have a session persisted on the server, and a cookie set on the client. The name of the cookie should be "chocolatechip".
+
+    // The session can be persisted in memory (would not be adecuate for production) or you can use a session store like `connect-session-knex`.
+*/
+
+/** auth-middleware
+    * restricted
+        -  If the user does not have a session saved in the server:
+        { "status": 401, "message": "You shall not pass!" }
+    * checkUsernameFree
+        - If the username in req.body already exists in the database
+        { "status" 422, "message": "Username taken" }
+    * checkUsernameExists
+        - If the username in req.body does NOT exist in the database
+        { status: 401, message: "Invalid credentials" }
+    * checkPasswordLength
+        - If password is missing from req.body, or if it's 3 chars or shorter
+        { status: 422, message: "Password must be longer than 3 chars" }
+*/
